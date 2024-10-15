@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Background Color</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Welcome to the Color Changer</h1>
+<p>Choose your favorite color and watch the magic happen!</p>
+
+<script>
+    // ask users to input their favorite color from a list of colors. Then change the background color of the page to that color.
+
+    // Array of valid colors
+    const colorList = ['red', 'blue', 'green', 'yellow', 'purple', 'pink', 'orange'];
+
+    // Function to prompt the user for their favorite color
+    function getUserColor() {
+        let userColor = prompt(`Please enter your favorite color from the following list: \n${colorList.join(', ')}`);
+        return userColor ? userColor.toLowerCase() : '';
+    }
+
+    // Function to check if the user's input is a valid color from the list
+    function isValidColor(color) {
+        return colorList.includes(color);
+    }
+
+    // Function to change the background color
+    function changeBackgroundColor(color) {
+        if (isValidColor(color)) {
+            document.body.style.backgroundColor = color;
+            document.querySelector('h1').innerText = `The background is now ${color}!`;
+        } else {
+            alert("Invalid color! Please refresh and try again.");
+        }
+    }
+
+    // Main sequence of the program
+    const userColor = getUserColor(); // Get color input from user
+    changeBackgroundColor(userColor); // Change background color if valid
+
+</script>
+
+</body>
+</html>
