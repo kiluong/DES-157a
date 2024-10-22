@@ -36,50 +36,6 @@ header h1 a {
     left: -40px;
 }
 
-nav {
-    margin-top: 20px;
-    position: relative;
-    z-index: 1; 
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-nav ul li {
-    margin-bottom: 10px; 
-}
-
-nav ul li a {
-    display: block;
-    padding: 8px 16px;
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    border: none;
-    border-radius: 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    box-shadow: 0px 0px 45px -15px rgba(0,0,0,0.75);
-}
-
-nav ul li a:hover {
-    color: rgb(98, 70, 126);
-}
-
-nav ul.post-nav {
-    color: #845F8D;
-    display: flex;
-    text-decoration: underline;
-    justify-content: space-between; 
-}
-
-/* Remove box shadow from previous and next buttons */
-nav ul.post-nav li.prev-button a,
-nav ul.post-nav li.next-button a {
-    color: #845F8D;
-    box-shadow: none;
-}
-
 
 footer {
     background-color: #C9C2CE;

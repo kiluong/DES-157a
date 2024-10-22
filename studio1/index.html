@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mad Libs - Polaroid Style</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
+
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Link to external javascript -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="polaroid">
+        <div class="polaroid-frame">
+            <p>I missed your 21st birthday, I’ve been up at 
+                <input type="text" id="place" placeholder="place" required>. 
+                Almost tried to 
+                <input type="text" id="verb1" placeholder="verb" required> you, don’t know if I should. 
+                Hate to see you half-
+                <input type="text" id="adjective" placeholder="adjective" required>, 
+                <input type="text" id="verb2" placeholder="verb ending in -ing" required>. 
+                Hate to think you 
+                <input type="text" id="verb3" placeholder="verb (past tense)" required> without me. 
+                I’m sorry if you 
+                <input type="text" id="verb4" placeholder="verb ending in -ed" required> me, if I were 
+                <input type="text" id="noun1" placeholder="noun" required>, I would. 
+                Thought you’d see if 
+                <input type="text" id="verb5" placeholder="verb ending in -ing" required>, but you 
+                <input type="text" id="adverb1" placeholder="adverb" required> could. 
+                I still haven’t 
+                <input type="text" id="verb6" placeholder="verb (past tense)" required> from your 
+                <input type="text" id="noun2" placeholder="noun" required>. 
+                But you said your 
+                <input type="text" id="noun3" placeholder="noun" required> will 
+                <input type="text" id="adverb2" placeholder="adverb" required> 
+                <input type="text" id="verb7" placeholder="verb" required> me.
+            </p>
+
+            <button type="button" onclick="generateMadLib()">Submit</button>
+        </div>
+        <div class="polaroid-caption">
+            <p>"21" Mad Libs</p>
+        </div>
+    </div>
+
+    <p class="madlib-output" id="madLibResult"></p>
+
+</body>
+</html>
