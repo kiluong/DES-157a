@@ -1,20 +1,44 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Add event listeners to each image to open corresponding modal
-    document.querySelectorAll('.image').forEach(image => {
-        image.addEventListener('click', function() {
-            const imageId = this.id;
-            const modalId = `modal${imageId.slice(-1)}`; 
-            const modal = document.getElementById(modalId);
-            
-            if (modal) {
-                modal.style.display = 'flex'; // Show the modal
-            } else {
-                console.error(`Modal with ID ${modalId} not found`);
-            }
-        });
+(function() {
+    'use strict';
+
+    const area1 = document.querySelector('#camera-area');
+    const area2 = document.querySelector('#headphones-area');
+    const area3 = document.querySelector('#matcha-area');
+    const area4 = document.querySelector('#lashes-area');
+    const area5 = document.querySelector('#pendant-area');
+
+    // Function to open the correct modal when an area is clicked
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'flex'; // Show the modal
+        } else {
+            console.error(`Modal with ID ${modalId} not found`);
+        }
+    }
+
+    // Add event listeners to each area
+    area1.addEventListener('click', function() {
+        openModal('modal1');
     });
 
-    // Add click event to close modals when clicking outside modal content
+    area2.addEventListener('click', function() {
+        openModal('modal2');
+    });
+
+    area3.addEventListener('click', function() {
+        openModal('modal3');
+    });
+
+    area4.addEventListener('click', function() {
+        openModal('modal4');
+    });
+
+    area5.addEventListener('click', function() {
+        openModal('modal5');
+    });
+
+    // Function to close modals when clicking outside the modal content
     document.querySelectorAll('.modal').forEach(modal => {
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
@@ -22,4 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-});
+
+    function putImageOnTop(id) {
+        const allImgs = document.querySelectorAll('div > img');
+        for (const eachImg of allImgs) {
+            if (eachImg.id === id) {
+                eachImg.style.zIndex = '1';
+            } else {
+                eachImg.style.zIndex = '0';
+            }
+        }
+    }
+})();
