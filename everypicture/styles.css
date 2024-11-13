@@ -131,6 +131,9 @@ area {
     align-items: center;
     justify-content: center;
     z-index: 2; /* Modal above the image and text */
+    transition-property: opacity, visibility;
+    transition-duration: 1s;
+    transition-timing-function: ease;
 }
 
 .modal-content {

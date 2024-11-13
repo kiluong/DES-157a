@@ -47,6 +47,18 @@
         });
     });
 
+    // Closing the Overlay with Escape Key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (modal.style.display === 'flex') {
+                    modal.style.display = 'none'; // Hide the modal
+                }
+            });
+        }
+    });
+
+    
     function putImageOnTop(id) {
         const allImgs = document.querySelectorAll('div > img');
         for (const eachImg of allImgs) {
