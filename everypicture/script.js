@@ -1,5 +1,6 @@
 (function() {
     'use strict';
+    console.log('reading js');
 
     const area1 = document.querySelector('#camera-area');
     const area2 = document.querySelector('#headphones-area');
