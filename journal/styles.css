@@ -96,3 +96,23 @@ section article p {
 figcaption {
     color: #DAACB0;
 }
+
+/* Updated CSS code to display articles in 2 columns */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between articles */
+  }
+  
+  article {
+    flex: 50%;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    article {
+      flex: 1 1 100%; /* Full width for single column on smaller screens */
+    }
+  }
+  
