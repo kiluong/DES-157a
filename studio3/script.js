@@ -18,6 +18,7 @@
         attack: [10, 20, 30, 40, 50],
         defense: [0, 0],
         index: 0, // Current turn
+        gameOver: false, // Track if the game has ended
     };
 
     // Start Button Logic
@@ -33,9 +34,11 @@
     defendBtn.addEventListener('click', () => performAction('defend'));
 
     function performAction(action) {
+        if (gameData.gameOver) return; // Do nothing if the game is over
+    
         const attackerIndex = gameData.index;
         const defenderIndex = attackerIndex === 0 ? 1 : 0;
-
+    
         switch (action) {
             case 'attack':
                 performAttack(attackerIndex, defenderIndex);
@@ -47,37 +50,44 @@
                 performDefend(attackerIndex);
                 break;
         }
-
+    
         // Pass turn to the other player
         gameData.index = defenderIndex;
         updateTurnMessage();
     }
+    
+    function updateTurnMessage() {
+        if (gameData.gameOver) return; // Do nothing if the game is over
+    
+        const currentPlayer = gameData.monsters[gameData.index];
+        messages.innerHTML += `<p>It's now ${currentPlayer}'s turn. Choose an action!</p>`;
+    }    
 
     function performAttack(attackerIndex, defenderIndex) {
         const attackValue = gameData.attack[Math.floor(Math.random() * gameData.attack.length)];
         const reducedDamage = Math.floor(attackValue * (1 - gameData.defense[defenderIndex] / 100));
         const defenseBlocked = attackValue - reducedDamage;
-
+    
         gameData.defense[defenderIndex] = 0; // Reset defense
         gameData.health[defenderIndex] = Math.max(gameData.health[defenderIndex] - reducedDamage, 0);
         updateHealthBar(defenderIndex);
-
-        // Trigger attack animation
-        const attacker = document.querySelector(`#Duskrune`);
-        const defender = document.querySelector(`#Aetherwing`);
-
+    
+        // Dynamically target the attacker and defender elements
+        const attacker = document.querySelector(`#${gameData.monsters[attackerIndex]}`);
+        const defender = document.querySelector(`#${gameData.monsters[defenderIndex]}`);
+    
         attacker.classList.add('attack-shake');
         defender.classList.add('attack-fade');
-
+    
         setTimeout(() => {
             attacker.classList.remove('attack-shake');
             defender.classList.remove('attack-fade');
         }, 500);
-
+    
         messages.innerHTML = `<p>${gameData.monsters[attackerIndex]} attacked for ${attackValue} damage. 
                               ${gameData.monsters[defenderIndex]}'s defense blocked ${defenseBlocked}, 
                               resulting in ${reducedDamage} damage!</p>`;
-
+    
         if (gameData.health[defenderIndex] <= 0) {
             endGame(gameData.monsters[attackerIndex]);
         }
@@ -114,11 +124,6 @@
         messages.innerHTML = `<p>${gameData.monsters[playerIndex]} increased their defense by ${defensePercent}% for the next attack!</p>`;
     }
 
-    function updateTurnMessage() {
-        const currentPlayer = gameData.monsters[gameData.index];
-        messages.innerHTML += `<p>It's now ${currentPlayer}'s turn. Choose an action!</p>`;
-    }
-
     function updateHealthBar(index) {
         const healthBar = document.querySelector(`#healthbar${index} div`);
         const healthText = document.querySelector(`#healthbar${index} .health-text`);
@@ -129,27 +134,66 @@
     }
 
     function endGame(winner) {
+        gameData.gameOver = true; // Set the flag
         messages.innerHTML = `<p>${winner} wins the battle!</p><button id="reset">Restart Game</button>`;
         controls.classList.add('hidden'); // Hide the action buttons
-
-        // Ensure the reset button works after it is added dynamically
-        const resetButton = document.querySelector('#reset');
-        resetButton.addEventListener('click', resetGame);
+    
+        // Attach the event listener to the reset button after it is added
+        setTimeout(() => {
+            const resetButton = document.querySelector('#reset');
+            if (resetButton) {
+                resetButton.addEventListener('click', resetGame);
+                console.log('Reset button listener attached.');
+            } else {
+                console.error('Reset button not found in the DOM.');
+            }
+        }, 0);
     }
-
+    
     function resetGame() {
-        // Reset game data to the initial state
+        console.log('Reset game triggered');
         gameData.health = [100, 100];
         gameData.defense = [0, 0];
         gameData.index = Math.round(Math.random());
-
-        // Reset health bars and messages
+        gameData.gameOver = false; // Reset the flag
+    
         updateHealthBar(0);
         updateHealthBar(1);
-        messages.innerHTML = `<p>${gameData.monsters[gameData.index]} will attack first!</p>`;
-
-        // Show the start button again
+    
+        // Update the message to show "Start the battle!" after reset
+        messages.innerHTML = `<p>Press the Start Button to begin the battle!</p>`;
         startBtn.classList.remove('hidden');
-        controls.classList.add('hidden'); // Hide action buttons initially
+        controls.classList.add('hidden');
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const particleContainer = document.querySelector('#particle-container');
+        
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Randomize the size and position of the particle
+            const size = Math.random() * 7 + 3; // Size between 3px and 10px
+            const left = Math.random() * window.innerWidth; // Random position across screen width
+        
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${left}px`;
+            particle.style.bottom = '0px'; // Start from the bottom of the container
+            
+            // Add the particle to the container
+            particleContainer.appendChild(particle);
+        
+            // Remove the particle after the animation ends
+            setTimeout(() => {
+                particle.remove();
+            }, 4000); // Match the duration of the animation
+        }
+        
+        // Generate particles at regular intervals
+        setInterval(createParticle, 300); // Adjust interval for more or fewer particles
+    });
+    
+    
 })();

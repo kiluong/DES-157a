@@ -5,6 +5,12 @@ body {
 
 h1 {
     text-align: center;
+    color: #D4B31A;
+    text-shadow: 
+        2px 2px 0px #F1FE00, 
+        -2px -2px 0px #F1FE00,
+        2px -2px 0px #F1FE00,
+        -2px 2px 0px #F1FE00; 
 }
 
 h2 {
@@ -115,14 +121,19 @@ button {
     font-size: 16px; 
     cursor: pointer; 
     font-family: "Silkscreen", sans-serif; 
-    transition: background-color 0.3s, color 0.3s; 
+    transition: transform 0.3s, background-color 0.3s;
 }
 
 /* Hover effect for buttons */
 button:hover {
     background-color: rgb(0, 0, 0, 0.4); 
-    color: red; 
-    border: 2px solid red; 
+    color: #F1FE00; 
+    border: 2px solid #F1FE00; 
+    transform: scale(1.1);
+}
+
+button:active {
+    transform: scale(1); /* Reset zoom */
 }
 
 #start {
@@ -147,12 +158,40 @@ button:hover {
     font-size: 16px; 
     cursor: pointer; 
     font-family: "Silkscreen", sans-serif; 
-    transition: background-color 0.3s, color 0.3s; 
+    transition: transform 0.3s, background-color 0.3s;
 }
 
 #controls button:hover {
-    border: 2px solid red; 
-    color: red;
+    border: 2px solid #F1FE00; 
+    color: #F1FE00;
+    transform: scale(1.1);
+}
+
+#controls button:active {
+    transform: scale(1); /* Reset zoom */
+}
+
+
+#reset {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: rgb(0, 0, 0); 
+    border: 2px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+#reset:hover {
+    background-color: rgba(1,148,57); 
+    color: white;
+    border: 2px solid white;
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+#reset:active {
+    transform: scale(1); /* Reset zoom */
 }
 
 
@@ -221,4 +260,34 @@ number can just be tacked on to the class name in JS. */
 .showing {
     visibility: visible;
     opacity: 1;
+}
+
+/* Dust particle styles */
+#particle-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* To ensure particles don't block interactions */
+    z-index: 10; /* Ensure particles are above the background but below other elements */
+}
+
+.particle {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8); /* Dusty light gray color */
+    border-radius: 100%;
+    opacity: 1;
+    animation: rise 6s linear infinite;
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0.5); /* Move upwards and shrink */
+        opacity: 0; /* Fade out as it rises */
+    }
 }
