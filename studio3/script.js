@@ -3,8 +3,8 @@
 
     console.log('JavaScript Loaded');
 
-    const monster1 = document.querySelector('#Billmon');
-    const monster2 = document.querySelector('#Glendamon');
+    const monster1 = document.querySelector('#Duskrune');
+    const monster2 = document.querySelector('#Aetherwing');
     const messages = document.querySelector('#messages');
     const startBtn = document.querySelector('#start');
     const attackBtn = document.querySelector('#attack');
@@ -13,7 +13,7 @@
     const controls = document.querySelector('#controls');
 
     const gameData = {
-        monsters: ['Billmon', 'Glendamon'],
+        monsters: ['Duskrune', 'Aetherwing'],
         health: [100, 100],
         attack: [10, 20, 30, 40, 50],
         defense: [0, 0],
@@ -63,8 +63,8 @@
         updateHealthBar(defenderIndex);
 
         // Trigger attack animation
-        const attacker = document.querySelector(`#Billmon`);
-        const defender = document.querySelector(`#Glendamon`);
+        const attacker = document.querySelector(`#Duskrune`);
+        const defender = document.querySelector(`#Aetherwing`);
 
         attacker.classList.add('attack-shake');
         defender.classList.add('attack-fade');

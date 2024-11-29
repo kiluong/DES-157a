@@ -8,7 +8,8 @@ h1 {
 }
 
 h2 {
-    font-size: 17px;
+    font-size: 20px;
+    font-weight: 100;
 }
 
 #game {
@@ -25,43 +26,60 @@ h2 {
 }
 
 img {
-    margin-top: 15px;
+    margin-top: 1px;
+}
+
+#Duskrune {
+    margin-top: 150px; /* Adjust the value to lower the image */
+}
+
+#bg {
+    position: fixed; /* Fixes the image in place while scrolling */
+    top: -150px;
+    left: 0;
+    width: 100%; /* Make the image span the full width */
+    height: 120vh; /* Make the image span the full viewport height */
+    object-fit: cover; /* Ensures the image scales proportionally */
+    z-index: -1; /* Places the image behind other content */
 }
 
 .health {
     display: flex;
     align-items: center;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 #healthbar0, #healthbar1 {
     position: relative;
+    background: rgb(0, 0, 0, 0.5);
     width: 230px;
     height: 20px;
-    border: 2px solid #333;
+    border: 2px solid #DAFBAD;
     overflow: hidden;
-    background: #f5f5f5;
 }
 
 #healthbar0 div, #healthbar1 div {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%; 
     height: 100%;
     background: linear-gradient(0deg, rgba(1,148,57,1) 0%, rgba(68,203,120,1) 50%, rgba(1,148,57,1) 100%);
-    transition: width 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out; 
 }
 
+
 .health-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 14px;
-    color: #000;
-    font-weight: bold;
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    font-size: 10px; 
+    color: #DAFBAD; 
+    font-weight: bold; 
     pointer-events: none;
 }
+
 
 #action {
     max-width: 1000px;
@@ -73,7 +91,7 @@ img {
 #messages {
     padding: 10px;
     border: 2px solid #333;
-    margin-bottom: 10px; /* Reduced space below message */
+    margin-bottom: 10px; 
     background-color: #f9f9f9;
     min-height: 50px;
 }
@@ -89,10 +107,10 @@ img {
 
 /* Style buttons to have a gray background with a white outline */
 button {
-    background-color: #808080; /* Gray background */
-    color: white; /* White text */
+    background-color: green; /* White background */
+    color: white; /* Gray text */
     border: 2px solid white; /* White outline */
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 20px; /* Rounded corners */
     padding: 10px 20px; /* Padding for button size */
     font-size: 16px; /* Font size for readability */
     cursor: pointer; /* Pointer cursor on hover */
@@ -102,8 +120,9 @@ button {
 
 /* Hover effect for buttons */
 button:hover {
-    background-color: white; /* White background */
-    color: #808080; /* Gray text */
+    background-color: rgb(0, 0, 0, 0.4); /* White background */
+    color: rgb(68,203,120); /* Gray text */
+    border: 2px solid rgb(68,203,120); /* White outline */
 }
 
 #start {
@@ -120,10 +139,10 @@ button:hover {
 }
 
 #controls button {
-    background-color: #808080; /* Gray background */
+    background-color: rgb(0, 0, 0, 0.5); /* Gray background */
     color: white; /* White text */
     border: 2px solid white; /* White outline */
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 20px; /* Rounded corners */
     padding: 10px 20px; /* Padding for button size */
     font-size: 16px; /* Font size for readability */
     cursor: pointer; /* Pointer cursor on hover */
@@ -132,9 +151,11 @@ button:hover {
 }
 
 #controls button:hover {
-    background-color: white; /* White background */
-    color: #808080; /* Gray text */
+    border: 2px solid red; 
+    color: red;
 }
+
+
 
 
 
