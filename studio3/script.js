@@ -12,6 +12,9 @@
     const defendBtn = document.querySelector('#defend');
     const controls = document.querySelector('#controls');
 
+    const clickSound = document.querySelector('audio[src="sound/click.mp3"]'); // Click sound
+    const swishSound = document.querySelector('audio[src="sound/swish.mp3"]'); // Swish sound
+
     const gameData = {
         monsters: ['Duskrune', 'Aetherwing'],
         health: [100, 100],
@@ -27,11 +30,26 @@
         messages.innerHTML = `<p>${gameData.monsters[gameData.index]} will attack first!</p>`;
         controls.classList.remove('hidden'); // Show the action buttons
         startBtn.classList.add('hidden'); // Hide the start button
+        playClickSound(); // Play click sound immediately
     });
 
-    attackBtn.addEventListener('click', () => performAction('attack'));
-    healBtn.addEventListener('click', () => performAction('heal'));
-    defendBtn.addEventListener('click', () => performAction('defend'));
+    attackBtn.addEventListener('click', () => {
+        playClickSound(); // Play click sound immediately
+        performAction('attack');
+    });
+    healBtn.addEventListener('click', () => {
+        playClickSound(); // Play click sound immediately
+        performAction('heal');
+    });
+    defendBtn.addEventListener('click', () => {
+        playClickSound(); // Play click sound immediately
+        performAction('defend');
+    });
+
+    function playClickSound() {
+        clickSound.currentTime = 0; // Rewind to the beginning
+        clickSound.play(); // Play the click sound immediately
+    }
 
     function performAction(action) {
         if (gameData.gameOver) return; // Do nothing if the game is over
@@ -61,17 +79,22 @@
     
         const currentPlayer = gameData.monsters[gameData.index];
         messages.innerHTML += `<p>It's now ${currentPlayer}'s turn. Choose an action!</p>`;
-    }    
+    }
 
     function performAttack(attackerIndex, defenderIndex) {
         const attackValue = gameData.attack[Math.floor(Math.random() * gameData.attack.length)];
         const reducedDamage = Math.floor(attackValue * (1 - gameData.defense[defenderIndex] / 100));
         const defenseBlocked = attackValue - reducedDamage;
-    
+
         gameData.defense[defenderIndex] = 0; // Reset defense
         gameData.health[defenderIndex] = Math.max(gameData.health[defenderIndex] - reducedDamage, 0);
         updateHealthBar(defenderIndex);
-    
+
+        // Play swish sound after a slight delay to match health bar animation
+        setTimeout(() => {
+            playSwishSound(); // Play the swish sound after the health bar is updated
+        }, 200); // Adjust the delay if needed
+
         // Dynamically target the attacker and defender elements
         const attacker = document.querySelector(`#${gameData.monsters[attackerIndex]}`);
         const defender = document.querySelector(`#${gameData.monsters[defenderIndex]}`);
@@ -133,6 +156,11 @@
         healthText.textContent = `${healthPercent}%`;
     }
 
+    function playSwishSound() {
+        swishSound.currentTime = 0; // Rewind to the beginning
+        swishSound.play(); // Play the swish sound
+    }
+
     function endGame(winner) {
         gameData.gameOver = true; // Set the flag
         messages.innerHTML = `<p>${winner} wins the battle!</p><button id="reset">Restart Game</button>`;
@@ -192,8 +220,6 @@
         }
         
         // Generate particles at regular intervals
-        setInterval(createParticle, 300); // Adjust interval for more or fewer particles
+        setInterval(createParticle, 300);
     });
-    
-    
 })();
