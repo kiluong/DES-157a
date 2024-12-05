@@ -100,12 +100,6 @@ header {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.highlighted {
-    z-index: 10; /* Bring highlighted images above the background */
-    opacity: 1;
-}
-
-
 #bg {
     position: relative;
     top: 0;
@@ -122,7 +116,7 @@ area {
     cursor: pointer;
 }
 
-#imagemap {
+#image-map {
     z-index: 10;
 }
 
@@ -140,7 +134,7 @@ area {
 
 /* Modal Styles */
 .modal {
-    display: none;
+    display: flex; /* Use flex layout */
     position: fixed;
     top: 0;
     left: 0;
@@ -149,11 +143,17 @@ area {
     background-color: rgba(0, 0, 0, 0.4);
     align-items: center;
     justify-content: center;
+    opacity: 0; /* Start hidden */
+    visibility: hidden; /* Ensure it's not interactable */
     z-index: 100; /* Modal above the image and text */
-    transition-property: opacity, visibility;
-    transition-duration: 1s;
-    transition-timing-function: ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
+
+.modal.show {
+    opacity: 1; /* Fully visible */
+    visibility: visible; /* Interactable */
+}
+
 
 .modal-content {
     display: flex;

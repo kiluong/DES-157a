@@ -9,24 +9,20 @@
     const area5 = document.querySelector('#pendant-area');
     const allImgs = document.querySelectorAll('#image-container img');
 
+    let isMouseMoving = false;
     document.addEventListener("mousemove", (e) => {
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-    
-        const gradientCenterX = (mouseX / window.innerWidth) * 100;
-        const gradientCenterY = (mouseY / window.innerHeight) * 100;
-    
-        const revealedArea = document.querySelector(".revealed-area");
-        if (revealedArea) {
-            revealedArea.style.background = `radial-gradient(
-                circle 280px at ${gradientCenterX}% ${gradientCenterY}%,
-                transparent 0%, rgba(0, 0, 0, 0.8) 100%
-            )`;
-        } else {
-            console.error('Element with class "revealed-area" not found.');
+        if (!isMouseMoving) {
+            isMouseMoving = true;
+            requestAnimationFrame(() => {
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+                const gradientCenterX = (mouseX / window.innerWidth) * 100;
+                const gradientCenterY = (mouseY / window.innerHeight) * 100;
+                document.querySelector(".revealed-area").style.background = `radial-gradient(circle 280px at ${gradientCenterX}% ${gradientCenterY}%, transparent 0%, rgba(0, 0, 0, 0.8) 100%)`;
+                isMouseMoving = false;
+            });
         }
     });
-
 
     // Add event listeners for hover (mouseover and mouseout) to highlight images
     area1.addEventListener('mouseover', function() {
@@ -70,34 +66,28 @@
     }
     
     function putImageOnTop(id) {
-        // Remove highlighted class from all images first
         const allImgs = document.querySelectorAll('#image-container img');
-        allImgs.forEach(img => img.classList.remove('highlighted'));
     
-        // Add the highlighted class to the targeted image
         const img = document.getElementById(id);
         if (img) {
-            img.style.zIndex = '2';  // Bring the hovered image to the top
-            img.style.opacity = '1';  // Make the image visible
-            img.classList.add('highlighted');  // Add highlight class
+            img.style.zIndex = '2';  
+            img.style.opacity = '1';  
         }
     }
-    
     
     function resetBackground() {
         // Reset all images to their default state
         const images = document.querySelectorAll('#image-container img');
         images.forEach(img => {
-            img.classList.remove('highlighted');  // Remove the highlighted class
-            img.style.zIndex = '0';  // Reset z-index to default
-            img.style.opacity = '0';  // Reset opacity to hidden
+            img.style.zIndex = '0';  
+            img.style.opacity = '0';  
         });
     
-        // Reset the background to full opacity (optional, uncomment if needed)
-        document.querySelector('#bg').style.opacity = '1';
+        // Reset the background to full opacity 
+        document.querySelector('#bg').style.opacity = '1'; //this is causing flicker
     }
 
-    // Existing click event listeners (don't modify)
+    // Existing click event listeners 
     area1.addEventListener('click', function() {
         openModal('modal1');
     });
@@ -116,26 +106,26 @@
 
     function openModal(modalId) {
         const modal = document.getElementById(modalId);
-        if (modal && modal.style.display !== 'flex') {
-            closeAllModals();  // Close any open modals
-            modal.style.display = 'flex'; // Show the modal
+        if (modal && !modal.classList.contains('show')) {
+            closeAllModals(); 
+            modal.classList.add('show'); 
         }
     }
     
     function closeAllModals() {
         const modals = document.querySelectorAll('.modal');
         modals.forEach(modal => {
-            modal.style.display = 'none'; // Hide the modal
+            modal.classList.remove('show'); 
         });
     }
-    
 
     // Function to close modals when clicking outside the modal content
     document.querySelectorAll('.modal').forEach(modal => {
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
-                modal.style.display = 'none'; // Hide the modal
+                modal.classList.remove('show'); 
             }
         });
     });
+    
 })();
