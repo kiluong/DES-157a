@@ -24,56 +24,56 @@
         }
     });
 
-    // Add event listeners for hover (mouseover and mouseout) to highlight images
-    area1.addEventListener('mouseover', function() {
-        highlights('camerahl');
-    });
-    area1.addEventListener('mouseout', function() {
-        resetBackground();
-    });
+    // // Add event listeners for hover (mouseover and mouseout) to highlight images
+    // area1.addEventListener('mouseover', function() {
+    //     highlights('camerahl');
+    // });
+    // area1.addEventListener('mouseout', function() {
+    //     resetBackground();
+    // });
 
-    area2.addEventListener('mouseover', function() {
-        highlights('headphoneshl');
-    });
-    area2.addEventListener('mouseout', function() {
-        resetBackground();
-    });
+    // area2.addEventListener('mouseover', function() {
+    //     highlights('headphoneshl');
+    // });
+    // area2.addEventListener('mouseout', function() {
+    //     resetBackground();
+    // });
 
-    area3.addEventListener('mouseover', function() {
-        highlights('matchahl');
-    });
-    area3.addEventListener('mouseout', function() {
-        resetBackground();
-    });
+    // area3.addEventListener('mouseover', function() {
+    //     highlights('matchahl');
+    // });
+    // area3.addEventListener('mouseout', function() {
+    //     resetBackground();
+    // });
 
-    area4.addEventListener('mouseover', function() {
-        highlights('lasheshl');
-    });
-    area4.addEventListener('mouseout', function() {
-        resetBackground();
-    });
+    // area4.addEventListener('mouseover', function() {
+    //     highlights('lasheshl');
+    // });
+    // area4.addEventListener('mouseout', function() {
+    //     resetBackground();
+    // });
 
-    area5.addEventListener('mouseover', function() {
-        highlights('pendanthl');
-    });
-    area5.addEventListener('mouseout', function() {
-        resetBackground();
-    });
+    // area5.addEventListener('mouseover', function() {
+    //     highlights('pendanthl');
+    // });
+    // area5.addEventListener('mouseout', function() {
+    //     resetBackground();
+    // });
 
-    function highlights(id) {
-        const imageContainer = document.getElementById('image-container');
-        putImageOnTop(id);
-    }
+    // function highlights(id) {
+    //     const imageContainer = document.getElementById('image-container');
+    //     putImageOnTop(id);
+    // }
     
-    function putImageOnTop(id) {
-        const allImgs = document.querySelectorAll('#image-container img');
+    // function putImageOnTop(id) {
+    //     const allImgs = document.querySelectorAll('#image-container img');
     
-        const img = document.getElementById(id);
-        if (img) {
-            img.style.zIndex = '2';  
-            img.style.opacity = '1';  
-        }
-    }
+    //     const img = document.getElementById(id);
+    //     if (img) {
+    //         img.style.zIndex = '2';  
+    //         img.style.opacity = '1';  
+    //     }
+    // }
     
     function resetBackground() {
         // Reset all images to their default state
